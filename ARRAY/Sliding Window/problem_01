@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int removeDuplicates(int arr[], int n) {
+    if (n == 0) return 0;
+
+    int i = 0;  // slow pointer
+
+    for (int j = 1; j < n; j++) {
+        if (arr[j] != arr[i]) {
+            i++;               // move to next position
+            arr[i] = arr[j];   // update with unique value
+        }
+    }
+
+    return i + 1;  // new length of array
+}
+
+int main() {
+    int arr[] = {1, 1, 2, 2, 2, 3, 4, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int newLength = removeDuplicates(arr, n);
+
+    cout << "Array after removing duplicates: ";
+    for (int i = 0; i < newLength; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << "\nNew length: " << newLength << endl;
+
+    return 0;
+}

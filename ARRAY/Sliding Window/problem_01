@@ -1,32 +1,34 @@
+//Given an array of integers and a number k, find the maximum sum of any contiguous subarray of size k.
+
 #include <iostream>
+#include <vector>
 using namespace std;
 
-int removeDuplicates(int arr[], int n) {
-    if (n == 0) return 0;
+int maxSumSubarrayOfSizeK(vector<int> &arr, int k) {
+    int n = arr.size();
+    if(n < k) return -1;
 
-    int i = 0;  // slow pointer
-
-    for (int j = 1; j < n; j++) {
-        if (arr[j] != arr[i]) {
-            i++;               // move to next position
-            arr[i] = arr[j];   // update with unique value
-        }
+    int windowsum = 0;
+    for(int i=0; i<k; i++){
+        windowsum += arr[i];
     }
 
-    return i + 1;  // new length of array
+    int maxsum = windowsum;
+
+    for(int i = k; i<n; i++){
+        windowsum += arr[i] - arr[i-k];
+        maxsum = max(maxsum,windowsum);
+    }
+
+    return maxsum;
 }
 
 int main() {
-    int arr[] = {1, 1, 2, 2, 2, 3, 4, 4};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    vector<int> arr = {2, 1, 6, 1, 3, 2};
+    int k = 3;
 
-    int newLength = removeDuplicates(arr, n);
-
-    cout << "Array after removing duplicates: ";
-    for (int i = 0; i < newLength; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << "\nNew length: " << newLength << endl;
+    int result = maxSumSubarrayOfSizeK(arr, k);
+    cout << "Maximum sum of subarray of size " << k << " is: " << result << endl;
 
     return 0;
 }

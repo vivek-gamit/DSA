@@ -1,0 +1,11 @@
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        if (n <= 0) return false;
+        long long sum = 1; // Start from 1 (3^0)
+        while (sum < n) {
+            sum *= 3;
+        }
+        return sum == n;
+    }
+};

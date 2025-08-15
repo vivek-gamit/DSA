@@ -1,0 +1,14 @@
+//342. Power of Four
+class Solution {
+public:
+    bool isPowerOfFour(int n) {
+        if(n <= 0) return false;
+        long long sum = 1;
+
+        while(sum < n){
+            sum *= 4;
+        }
+
+        return sum == n;
+    }
+};
